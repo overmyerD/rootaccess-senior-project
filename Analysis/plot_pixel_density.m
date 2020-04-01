@@ -8,10 +8,20 @@ function [ret_bar] = plot_pixel_density(reduced_pix_density, g_title, xtick_scal
     title(g_title);
     xlabel('X');
     ylabel('Number of Pixels');
-
-    %TODO: doesn't work if scaled with mouse wheel
+    
     xticks = get(gca,'xtick');
     newlabels = arrayfun(@(range) sprintf('%d', range * xtick_scale), xticks, 'un', 0);
     set(gca, 'xticklabel', newlabels);
+    
+    h = zoom;
+    set(h,'ActionPostCallback',{@zoomCallback, xtick_scale});
+    set(h,'Enable','on');gb
+    
 end
 
+function zoomCallback(obj, evd, scale) %#ok<INUSL>
+    newLim = evd.Axes.XLim; %#ok<NASGU>
+    xticks = get(gca,'xtick');
+    newlabels = arrayfun(@(newLim) sprintf('%d', newLim * scale), xticks, 'un', 0);
+    set(gca, 'xticklabel', newlabels);    
+end
