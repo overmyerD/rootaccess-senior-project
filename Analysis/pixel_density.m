@@ -11,11 +11,15 @@ width   = size(image, 2);
 height  = size(image, 1);
 
 %sum the columns into 1D arr
-pix_density = sum(image);
+pix_density = sum(image).';
+plot_pixel_density(pix_density, 'Root Density', 1);
 
 %reduction must be divisible by width
-reduction = 50;
+reduction = 100;
 
 %reshape to 2D and sum again to 1D arr
-reduced_pix_density = sum(reshape(pix_density, width/reduction,[]));
+reduced_pix_density = reduce_pixel_density(pix_density, reduction);
+
+scale = idivide(length(pix_density), int16(reduction));
+plot_pixel_density(reduced_pix_density, 'Root Density', scale);
 
