@@ -15,7 +15,7 @@ function [ret_bar] = plot_pixel_density(reduced_pix_density, g_title, xtick_scal
     
     h = zoom;
     set(h,'ActionPostCallback',{@zoomCallback, xtick_scale});
-    set(h,'Enable','on');gb
+    set(h,'Enable','on');
     
 end
 
