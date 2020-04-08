@@ -1,4 +1,9 @@
-function wow(yxBinaryImage, yzBinaryImage, barWidth_xyz, figureTitle, opName)
+canny_directory = "./Images/Canny/26DAP";
+yxBinaryImage = imbinarize(rgb2gray(imread(strcat(canny_directory, "/0242.jpg"))));
+yzBinaryImage = imbinarize(rgb2gray(imread(strcat(canny_directory, "/0241.jpg"))));
+barWidth_xyz = [10 10 10];
+figureTitle = '';
+opName = '';
 
 yxsize = size(yxBinaryImage);
 yzsize = size(yzBinaryImage);
