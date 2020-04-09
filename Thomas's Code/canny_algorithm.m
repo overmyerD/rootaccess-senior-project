@@ -1,17 +1,27 @@
 function canny_image = canny_algorithm(image)
-%     image = rgb2gray(image);
-%     thresh = graythresh(image);
-%     image = imbinarize(image,thresh);
-%     image = edge(image,'canny');
-%     canny_image = imdilate(image,strel('disk',3));
-
-    image = image(:,:,2);
-    image = imgaussfilt(image);
-    canny_image = edge(image,'canny',.03,3.5);
+    % converts image from color to gray scale
+    image = rgb2gray(image);
     
+    % covert image to double (gaussian filter requires double)
+    image = double(image);
+    
+    % gaussian filter to remove noise
+    sigma = 6;
+    masksize = 2*(sigma*2.5);
+    filter = fspecial('gaussian', masksize, sigma);
+    
+    % convolution with gaussian filter
+    image = conv2(image, filter, 'valid');
 
-% image = image(:,:,2);
-% [~,threshOut] = edge(image,'Canny');
-% threshold = threshOut*1.0;
-% canny_image = edge(image,'Canny',threshold);
+    % generate threshold values using mean and stdv of image     
+    lowthresh = max(1,(mean2(image)-std2(image)))/255;
+    highthresh = min(254,(mean2(image)+std2(image)))/255;
+    thresh = [lowthresh highthresh];
+    
+%     disp(thresh);
+    
+    canny_image = edge(image,'canny',thresh);
+    
+    
 end
+
