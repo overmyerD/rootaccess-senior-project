@@ -21,8 +21,8 @@ height = size(reduced_pix_density_xyz, 2);
 direction = zeros(1, width*height);
 speed = zeros(1, width*height);
 
-for i = 1:width
-    for j = 1:height
+for i = 1:width-1
+    for j = 1:height-1
         x = i - orgin_x;
         y = j - orgin_y;
         theta = atan2(y, x) * 180 / pi;
@@ -38,7 +38,7 @@ bar3(reduced_pix_density_xyz);
 Options.AngleNorth     = 0;
 Options.AngleEast      = 90;
 Options.FreqLabelAngle = 10;
-Options.ndirections = 25;
+Options.ndirections    = 25;
 WindRose(direction, speed,Options);
 
 
