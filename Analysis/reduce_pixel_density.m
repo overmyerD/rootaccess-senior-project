@@ -15,6 +15,6 @@ if mod(width, reduction) ~= 0
 end
 
 magnitude = idivide(width, int16(reduction));
-reduced_pix_density = sum(reshape(pix_density, idivide(width, int16(reduction)),[]));
+reduced_pix_density = sum(reshape(pix_density, magnitude,[]));
 end
 

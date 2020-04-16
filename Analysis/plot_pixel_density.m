@@ -6,7 +6,7 @@ function [ret_bar] = plot_pixel_density(reduced_pix_density, g_title, xtick_scal
     range = (1:l_length);
     bar(range, reduced_pix_density);
     title(g_title);
-    xlabel('X');
+    xlabel('Z');
     ylabel('Number of Pixels');
     
     xticks = get(gca,'xtick');
