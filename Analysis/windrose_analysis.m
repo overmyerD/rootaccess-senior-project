@@ -1,7 +1,9 @@
-function h = windrose_analysis(input)
-    [orgin_x, orgin_y] = get_max_xy(reduced_pix_density_xyz);
-    width = size(reduced_pix_density_xyz, 1);
-    height = size(reduced_pix_density_xyz, 2);
+function h = windrose_analysis(raw_3D_data)
+    h = figure('visible','off');
+    maximum = max(max(raw_3D_data));
+    [orgin_x,orgin_y]=find(raw_3D_data==maximum);
+    width = size(raw_3D_data, 1);
+    height = size(raw_3D_data, 2);
 
     direction = zeros(1, width*height);
     speed = zeros(1, width*height);
@@ -15,7 +17,7 @@ function h = windrose_analysis(input)
                 theta = theta + 360;
             end
             direction(i * height + j) = theta;
-            speed(i * height + j) = reduced_pix_density_xyz(i, j);
+            speed(i * height + j) = raw_3D_data(i, j);
         end
     end
     load options.mat;

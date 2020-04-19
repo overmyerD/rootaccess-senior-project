@@ -1,7 +1,7 @@
 function [ret_bar] = plot_2Dpixel_density(reduced_pix_density, g_title, xtick_scale)
     %PLOT_PIXEL_DENSITY Plots the root pixel density into a histogram like
     %bar graph.
-    ret_bar = figure('visible','off');;
+    ret_bar = figure('visible','off');
     l_length = length(reduced_pix_density);
     range = (1:l_length);
     bar(range, reduced_pix_density);

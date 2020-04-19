@@ -26,4 +26,4 @@ Options.textfontname = 'Arial Black';
 Options.titlefontname = 'Courier New';
 Options.legendfontname = 'Calibri Light';
 
-save('options.mat', 'options');
+save('options.mat', 'Options');
