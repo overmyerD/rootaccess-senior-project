@@ -1,4 +1,4 @@
-rootdir = './senior_project/Run1';
+rootdir = './senior_project/Run1/10DAP';
 outputdir = './senior_project/Output_test/';
 analysisdir = './senior_project/Analysis_test/';
 
@@ -7,6 +7,8 @@ filelist = filelist(~[filelist.isdir]);  %remove folders from list
 indicies = find(contains({filelist.name}, 'white')==1);
 filelist(indicies) = [];
 raw_data2 = 0;
+set(groot,'defaultFigureVisible','off')
+
 % loops through every image in the directory, skipping brightfield images
 for i = 1:size(filelist,1)
     if contains(filelist(i).name, "BF") == 0 && contains(filelist(i).name, "white") == 0
