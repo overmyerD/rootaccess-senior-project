@@ -10,8 +10,6 @@ reduction = 100;
 
 [reduced_pix_density_xyz, reduced_pix_density_xy, reduced_pix_density_zy, magnitude] = reduce_pixel_density_matrix(image_1, image_2, reduction);
 
-plot_pixel_density(reduced_pix_density_zy, "pixel density", magnitude);
-
 [orgin_x, orgin_y] = get_max_xy(reduced_pix_density_xyz);
 
 
@@ -34,11 +32,38 @@ for i = 1:width-1
     end
 end
 
-bar3(reduced_pix_density_xyz);
-Options.AngleNorth     = 0;
-Options.AngleEast      = 90;
-Options.FreqLabelAngle = 10;
-Options.ndirections    = 25;
-WindRose(direction, speed,Options);
+%bar3(reduced_pix_density_xyz);
+%where to place the label, at what angle
+Options.FreqLabelAngle = 305;
+%number of sectors in the wind rose
+Options.ndirections    = 10;
+Options.radialgridnumber = 10;
+%number of lines from origin to edge of wind rose
+Options.nFreq = 4;
+Options.TitleString = {'Wind Rose 22 DAP'; ''; ''};
+Options.LabLegend = 'Pixel Density';
+Options.min_radius = 0;
+Options.cMap = 'lines';
+Options.LegendType = 2;
+Options.legendvariable = 'P_D';
+%scale of the actual wind rose
+Options.scalefactor = 1;
 
+%Options.figColor = 'k';
+%Options.textColor = [1 1 0.5];
+%Options.gridColor = 'w';
+
+% :, -, or --
+Options.gridstyle = '-';
+Options.gridcolor = 'k';
+Options.gridwidth = 1;
+Options.gridalpha = 0.25;
+
+Options.textfontname = 'Arial Black';
+Options.titlefontname = 'Courier New';
+Options.legendfontname = 'Calibri Light';
+
+WindRose(direction, speed, Options);
+
+clear;
 
