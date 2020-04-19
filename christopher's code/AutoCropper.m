@@ -17,9 +17,24 @@ function cropped_image = AutoCropper(image)
     values = sum((image(:,:,2)));
     values = values.*scalar;
 
-    % finds the max of the scaled function
-    m = max(values);
-    centerpoint = find(values == m);
+    % finds a number of local maxima across the distribution and what their
+    % indicies are
+    TF = islocalmax(values);
+    indicies = find(TF == 1);
+
+    % determines the index closest to the middle point of the image
+    [~,idx] = min(abs(indicies - width/2));
+
+    % determines the 2nd closest index to middle point
+    indicies2 = indicies(indicies~=indicies(idx));
+    [~,idx2] = min(abs(indicies2 - width/2));
+
+    % determines which of the two points has more green in a given column
+    if values(indicies(idx)) > values(indicies2(idx2))
+        centerpoint = indicies(idx);
+    else
+        centerpoint = indicies2(idx2);
+    end
 
     % crops the iamge to a preset width around the center point
     cropped_image = imcrop(image,[centerpoint-crop_width/2,0,crop_width,height]);
@@ -38,6 +53,5 @@ function cropped_image = AutoCropper(image)
     index = find(values == m);
     
     % crops the image to a pre set height based upon the max
-%     cropped_image = imcrop(cropped_image,[0,index+floor(height/48),width,crop_height]);
-    cropped_image = imcrop(cropped_image,[0,index+128,width,crop_height]);
+    cropped_image = imcrop(cropped_image,[0,index+(height/16),width,crop_height]);
 end
