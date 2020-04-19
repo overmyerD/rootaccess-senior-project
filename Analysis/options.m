@@ -4,7 +4,6 @@ Options.ndirections    = 10;
 Options.radialgridnumber = 10;
 %number of lines from origin to edge of wind rose
 Options.nFreq = 4;
-Options.TitleString = {'Wind Rose 22 DAP'; ''; ''};
 Options.LabLegend = 'Pixel Density';
 Options.min_radius = 0;
 Options.cMap = 'lines';
