@@ -5,8 +5,8 @@ function cropped_image = AutoCropper(image)
     
     height = size(image,1);
     width = size(image,2);
-    crop_width = width*.25;
-    crop_height = height*.5;
+    crop_width = height*.45;
+    crop_height = width*.45;
     
     %%% Crops Width
     % Creates a scalar function which is used to scale summed pixel value
