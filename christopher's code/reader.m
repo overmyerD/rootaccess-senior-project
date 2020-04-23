@@ -1,19 +1,20 @@
 tic;
-rootdir = './senior_project/run2/040120_21DAP';
-outputdir = './senior_project/Output21/';
-analysisdir = './senior_project/Analysis21/';
+rootdir = './senior_project/test_data';
+outputdir = './senior_project/test_data_canny/';
+% analysisdir = './senior_project/Analysis4/';
 
-filelist = dir(fullfile(rootdir, '**/*.JPG'));  %get list of files and folders in any subfolder
+filelist = dir(fullfile(rootdir, '**/*.jpg'));  %get list of files and folders in any subfolder
 filelist = filelist(~[filelist.isdir]);  %remove folders from list
 indicies = find(contains({filelist.name}, 'white')==1);
 filelist(indicies) = [];
 indicies = find(contains({filelist.name}, 'BF')==1);
 filelist(indicies) = [];
 raw_data2 = 0;
-set(groot,'defaultFigureVisible','off')
+% set(groot,'defaultFigureVisible','off')
 
 % loops through every image in the directory, skipping brightfield images
 for i = 1:size(filelist,1)
+    
     if contains(filelist(i).name, "BF") == 0 && contains(filelist(i).name, "white") == 0
         % get info about the filename and reads in image
         [filepath,name,ext] = fileparts(filelist(i).name);
@@ -30,13 +31,13 @@ for i = 1:size(filelist,1)
 % temp test code
 image = imfuse(image, c_image, 'montage');
         % writes the new image to a given directory
-        new_filename = strcat(outputdir,name,"_cropped",".JPG");
+        new_filename = strcat(outputdir,name,"_cropped",".png");
 %         new_filename = strcat(outputdir,string(i),".JPG");
         imwrite(image, new_filename);
         
         %%% analysis of the post canny images
         
-        % gets the numerical data of the image
+%         % gets the numerical data of the image
 %         [raw_data1,raw_data2] = reduce_pixel_density(image,raw_data2);
 %         % plots the figure and returns a handle to the variable
 %         h = plot_2Dpixel_density(raw_data2,"title",9);
